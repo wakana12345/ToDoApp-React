@@ -1,0 +1,27 @@
+.todo {
+  position: relative;
+  list-style: none;
+  height: 40px;
+  padding: 6px 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: rgba(3, 80, 63, 0.5);
+}
+
+.task {
+  color: white;
+  font-size: 18px;
+  padding-top: 4px;
+}
+
+.fa-trash-can {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  color: orange;
+  cursor: pointer;
+}
+.list {
+  padding: 0;
+  margin: 0;
+}

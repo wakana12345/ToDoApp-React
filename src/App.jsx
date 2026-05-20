@@ -1,29 +1,21 @@
 import "./App.css";
 import { useState } from "react";
+import { INIT_TODO_LIST, INIT_UNIQUE_ID } from "./constants/data";
 
-// ToDoの初期値
-const initTodo = [
-  {
-    id: 1,
-    title: "Todo1",
-  },
-  {
-    id: 2,
-    title: "Todo2",
-  },
-];
+/*compornents*/
+import { AddTodo } from "./components/AddTodo";
+import { TodoList } from "./components/TodoList";
 
 export const App = () => {
   /* 状態管理変数の宣言 */
   //TodoList
-  const [todoList, setTodoList] = useState(initTodo);
-  console.log(todoList);
+  const [todoList, setTodoList] = useState(INIT_TODO_LIST);
 
   // 入力時データ
   const [addInputValue, setAddInputValue] = useState("");
 
   //採番用ID
-  const [uniqueId, setUniqueId] = useState(initTodo.length);
+  const [uniqueId, setUniqueId] = useState(INIT_UNIQUE_ID);
 
   /* イベント発生時に実行される関数 */
   //入力データの更新
@@ -65,34 +57,16 @@ export const App = () => {
 
       {/* Todo追加領域 */}
       <section className="common-area">
-        <h2 className="add-title">ADD TODO</h2>
-
-        {/* addInputValue更新処理 */}
-        <input
-          className="input"
-          type="text"
-          value={addInputValue}
-          placeholder="New Todo"
-          onChange={onChangeAddInputValue}
-          onKeyDown={handleAddTodo}
+        <AddTodo
+          addInputValue={addInputValue}
+          onChangeAddInputValue={onChangeAddInputValue}
+          handleAddTodo={handleAddTodo}
         />
       </section>
 
       {/* Todo一覧表示 */}
       <section className="common-area">
-        <ul className="list">
-          {todoList.map((todo) => {
-            return (
-              <li className="todo" key={todo.id}>
-                <span className="task">{todo.title}</span>
-                <i
-                  className="fa-solid fa-trash-can"
-                  onClick={() => handleDeleteTodo(todo.id, todo.title)}
-                ></i>
-              </li>
-            );
-          })}
-        </ul>
+        <TodoList todoList={todoList} handleDeleteTodo={handleDeleteTodo} />
       </section>
     </div>
   );
