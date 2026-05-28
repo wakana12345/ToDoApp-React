@@ -28,13 +28,11 @@ export const App = () => {
       {/* Input Form領域 */}
       <section className="common-area">
         <InputForm
-          InputValue={}
-          handleChangeValue={}
-          handleKeyDown={}
+          handleChangeValue={action.handleSearchTodo}
+          value={state.searchKeyword}
           placeholder={"Search Keyword"}
         />
       </section>
-
 
       {/* Todo検索 */}
       <section className="common-area"></section>

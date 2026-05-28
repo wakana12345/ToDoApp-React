@@ -12,6 +12,9 @@ export const useApp = () => {
   //採番用ID
   const [uniqueId, setUniqueId] = useState(INIT_UNIQUE_ID);
 
+  //検索キーワード変数
+  const [searchKeyword, setSearchKeyword] = useState("");
+
   /* イベント発生時に実行される関数 */
   //入力データの更新
   const onChangeAddInputValue = (event) => {
@@ -46,15 +49,27 @@ export const useApp = () => {
     }
   };
 
+  // 検索キーワードを更新
+  const handleSearchTodo = (e) => {
+    setSearchKeyword(e.target.value);
+  };
+
+  const showTodoList = todoList.filter((todo) => {
+    const regexp = new RegExp("^" + searchKeyword, "i");
+    return todo.title.match(regexp);
+  });
+
   return [
     {
-      todoList,
+      todoList: showTodoList,
       addInputValue,
+      searchKeyword,
     },
     {
       onChangeAddInputValue,
       handleAddTodo,
       handleDeleteTodo,
+      handleSearchTodo,
     },
   ];
 };
